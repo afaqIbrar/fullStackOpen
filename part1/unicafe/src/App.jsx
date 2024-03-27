@@ -1,17 +1,34 @@
 import { useState } from 'react'
 import './App.css'
 
+const Button = ({handleClick,text}) => {
+  return (
+    <button onClick={handleClick}>{text}</button>
+  );
+}
+
+
 function App() {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const handleGoodClick = () => {
+    setGood(good + 1);
+  }
+  const handleBadClick = () => {
+    setBad(bad + 1);
+  }
+  const handleNeutrallick = () => {
+    setNeutral(neutral + 1);
+  }
+
   return (
     <>
      <h1>give feedback</h1>
-     <button onClick={() => setGood(good + 1)}>good</button>
-     <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-     <button onClick={() => setBad(bad + 1)}>bad</button>
+     <Button handleClick={handleGoodClick} text="good" />
+     <Button handleClick={handleNeutrallick} text="neutral" />
+     <Button handleClick={handleBadClick} text="bad" />
 
      <h1>Statistics</h1>
      <div>
@@ -30,6 +47,24 @@ function App() {
       <tr>
         <td>bad</td>
         <td>{bad}</td>
+      </tr>
+     </div>
+     <div>
+      <tr>
+        <td>all</td>
+        <td>{good+bad+neutral}</td>
+      </tr>
+     </div>
+     <div>
+      <tr>
+        <td>average</td>
+        <td>{(good - bad )/ good+bad+neutral}%</td>
+      </tr>
+     </div>
+     <div>
+      <tr>
+        <td>positive</td>
+        <td>{good / good+bad+neutral}%</td>
       </tr>
      </div>
     </>
