@@ -6,7 +6,16 @@ const Button = ({handleClick,text}) => {
     <button onClick={handleClick}>{text}</button>
   );
 }
-
+const Statistic = ({value , text}) => {
+    return (
+      <>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+     </>
+    )
+}
 
 function App() {
   const [good, setGood] = useState(0)
@@ -31,42 +40,11 @@ function App() {
      <Button handleClick={handleBadClick} text="bad" />
 
      <h1>Statistics</h1>
-     <div>
-      <tr>
-        <td>good</td>
-        <td>{good}</td>
-      </tr>
-     </div>
-     <div>
-      <tr>
-        <td>neutral</td>
-        <td>{neutral}</td>
-      </tr>
-     </div>
-     <div>
-      <tr>
-        <td>bad</td>
-        <td>{bad}</td>
-      </tr>
-     </div>
-     <div>
-      <tr>
-        <td>all</td>
-        <td>{good+bad+neutral}</td>
-      </tr>
-     </div>
-     <div>
-      <tr>
-        <td>average</td>
-        <td>{(good - bad )/ good+bad+neutral}%</td>
-      </tr>
-     </div>
-     <div>
-      <tr>
-        <td>positive</td>
-        <td>{good / good+bad+neutral}%</td>
-      </tr>
-     </div>
+     <Statistic text="good" value={good}/>
+     <Statistic text="neutral" value={neutral}/>
+     <Statistic text="bad" value={bad}/>
+     <Statistic text="average" value={(good - bad )/ good+bad+neutral + '%'}/>
+     <Statistic text="positive" value={good / good+bad+neutral + '%'}/>
     </>
 
   )
