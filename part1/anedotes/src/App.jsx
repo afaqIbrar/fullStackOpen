@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+// eslint-disable-next-line react/prop-types
 const ShowAnecdote = ({anectode, votes }) => {
   return (
     <>
@@ -23,12 +24,17 @@ const App = () => {
    
   const [selected, setSelected] = useState(0);
   const [votes,setVotes] = useState(new Array(7).fill(0));
+  const [maxVotes, updateMaxVotes] = useState(0);
+
   const generateRandomNumber = () => {
     setSelected(Math.floor(Math.random() * 7));
   }
   const handleVote = () => {
     const arr = [...votes];
     arr[selected] += 1;
+    if (arr[selected] > arr[maxVotes]) {
+      updateMaxVotes(selected);
+    }
     setVotes(arr);
   }
   return ( 
@@ -38,7 +44,7 @@ const App = () => {
       <button onClick={handleVote}>vote</button>
       <button onClick={generateRandomNumber}>next anedote</button>
       <h1>Anectode with most votes</h1>
-      <ShowAnecdote anectode={anecdotes[Math.max(...votes)]} votes={Math.max(...votes)} />
+      <ShowAnecdote anectode={anecdotes[maxVotes]} votes={votes[maxVotes]} />
     </div>
   )
 }
