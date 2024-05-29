@@ -41,6 +41,10 @@ function App() {
       phoneService
         .create(p).then(phone => {
           setPersons(persons.concat(phone));
+          setErrorMessage(`${phone.name} added`);
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
           setNewName('');
           setNewNumber('');
         })
@@ -78,7 +82,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Phone Book</h2>
+      <h1>Phone Book</h1>
       <Notification message={errorMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
